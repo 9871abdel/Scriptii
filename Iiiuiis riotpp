@@ -47,4 +47,3 @@ end
 
 -- Trigger the age-up effect
 simulateAgeUp()
-
