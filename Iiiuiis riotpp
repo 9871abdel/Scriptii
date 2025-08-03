@@ -1,51 +1,79 @@
--- Services
-local Players = game:GetService("Players")
-local player = Players.LocalPlayer
-local mouse = player:GetMouse()
+-- Roblox LocalScript for Pet Hatch Menu UI
 
--- GUI Setup
-local screenGui = Instance.new("ScreenGui")
-screenGui.Name = "PetAgeGUI"
-screenGui.Parent = player:WaitForChild("PlayerGui")
+local player = game.Players.LocalPlayer
+local screenGui = Instance.new("ScreenGui", player:WaitForChild("PlayerGui"))
+screenGui.Name = "PetHatchGui"
+screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Global
+screenGui.IgnoreGuiInset = true  -- Ensures UI isn't pushed down by top bar
 
 local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0, 250, 0, 100)
-frame.Position = UDim2.new(0.5, -125, 0.5, -50)
-frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
-frame.BackgroundTransparency = 0.5
+frame.Size = UDim2.new(0, 280, 0, 320)
+frame.Position = UDim2.new(0, 20, 0, 100)
+frame.BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+frame.BorderSizePixel = 0
+frame.ZIndex = 10
 frame.Parent = screenGui
+Instance.new("UICorner", frame).CornerRadius = UDim.new(0, 15)
 
-local ageLabel = Instance.new("TextLabel")
-ageLabel.Size = UDim2.new(1, 0, 0, 50)
-ageLabel.Position = UDim2.new(0, 0, 0, 25)
-ageLabel.BackgroundTransparency = 1
-ageLabel.Text = "Age 1"
-ageLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
-ageLabel.Font = Enum.Font.SourceSans
-ageLabel.TextSize = 30
-ageLabel.TextStrokeTransparency = 0.5
-ageLabel.Parent = frame
+local titleLabel = Instance.new("TextLabel", frame)
+titleLabel.Size = UDim2.new(1, 0, 0, 40)
+titleLabel.Position = UDim2.new(0, 0, 0, 0)
+titleLabel.BackgroundTransparency = 1
+titleLabel.Text = "Pet Hatch Menu"
+titleLabel.Font = Enum.Font.FredokaOne
+titleLabel.TextSize = 20
+titleLabel.TextColor3 = Color3.fromRGB(255, 255, 255)
+titleLabel.TextStrokeTransparency = 0.7
+titleLabel.TextScaled = true
+titleLabel.ZIndex = 11
 
--- Function to simulate age-up effect
-local function simulateAgeUp()
-    local originalText = ageLabel.Text
-    ageLabel.Text = "Age 50"
-    ageLabel.TextColor3 = Color3.fromRGB(255, 215, 0) -- Gold color
+local randomizeBtn = Instance.new("TextButton", frame)
+randomizeBtn.Size = UDim2.new(0, 240, 0, 40)
+randomizeBtn.Position = UDim2.new(0, 20, 0, 50)
+randomizeBtn.BackgroundColor3 = Color3.fromRGB(255, 140, 0)
+randomizeBtn.Text = "🎲 Randomize Pets"
+randomizeBtn.Font = Enum.Font.FredokaOne
+randomizeBtn.TextSize = 16
+randomizeBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+randomizeBtn.TextStrokeTransparency = 0.7
+randomizeBtn.TextScaled = true
+randomizeBtn.ZIndex = 11
 
-    -- Animate the text change
-    for i = 1, 3 do
-        ageLabel.TextColor3 = Color3.fromRGB(255, 0, 0) -- Red color
-        wait(0.1)
-        ageLabel.TextColor3 = Color3.fromRGB(255, 215, 0) -- Gold color
-        wait(0.1)
-    end
+local toggleESPBtn = Instance.new("TextButton", frame)
+toggleESPBtn.Size = UDim2.new(0, 240, 0, 40)
+toggleESPBtn.Position = UDim2.new(0, 20, 0, 100)
+toggleESPBtn.BackgroundColor3 = Color3.fromRGB(0, 170, 255)
+toggleESPBtn.Text = "Toggle ESP: OFF"
+toggleESPBtn.Font = Enum.Font.FredokaOne
+toggleESPBtn.TextSize = 16
+toggleESPBtn.TextColor3 = Color3.fromRGB(255, 255, 255)
+toggleESPBtn.TextStrokeTransparency = 0.7
+toggleESPBtn.TextScaled = true
+toggleESPBtn.ZIndex = 11
 
-    -- Reset to original text
-    wait(1)
-    ageLabel.Text = originalText
+local creditLabel = Instance.new("TextLabel", frame)
+creditLabel.Size = UDim2.new(1, 0, 0, 26)
+creditLabel.Position = UDim2.new(0, 0, 1, -30)
+creditLabel.BackgroundTransparency = 1
+creditLabel.Text = "Made by gagscripter4life"
+creditLabel.Font = Enum.Font.FredokaOne
+creditLabel.TextSize = 14
+creditLabel.TextColor3 = Color3.fromRGB(200, 200, 200)
+creditLabel.TextStrokeTransparency = 0.7
+creditLabel.TextScaled = true
+creditLabel.ZIndex = 11
+
+-- Function to randomize pets (placeholder)
+local function randomizePets()
+    -- Implement pet randomization logic here
 end
 
--- Trigger the age-up effect
-simulateAgeUp()
+-- Function to toggle ESP (placeholder)
+local function toggleESP()
+    -- Implement ESP toggle logic here
+end
 
-simulateAgeUp()
+-- Connect button actions
+randomizeBtn.MouseButton1Click:Connect(randomizePets)
+toggleESPBtn.MouseButton1Click:Connect(toggleESP)
+
