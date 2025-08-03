@@ -1,0 +1,45 @@
+-- Services
+local Players = game:GetService("Players")
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local player = Players.LocalPlayer
+
+-- GUI Setup
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "PetLevelUpGUI"
+screenGui.Parent = player:WaitForChild("PlayerGui")
+
+local frame = Instance.new("Frame")
+frame.Size = UDim2.new(0, 200, 0, 100)
+frame.Position = UDim2.new(0.5, -100, 0.5, -50)
+frame.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+frame.BackgroundTransparency = 0.5
+frame.Parent = screenGui
+
+local levelUpButton = Instance.new("TextButton")
+levelUpButton.Size = UDim2.new(1, 0, 0, 50)
+levelUpButton.Position = UDim2.new(0, 0, 0, 25)
+levelUpButton.BackgroundColor3 = Color3.fromRGB(0, 255, 0)
+levelUpButton.Text = "Level Up Pet to 50"
+levelUpButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+levelUpButton.Font = Enum.Font.SourceSans
+levelUpButton.TextSize = 20
+levelUpButton.Parent = frame
+
+-- Function to level up pet
+local function levelUpPet(pet)
+    local petModule = require(ReplicatedStorage:WaitForChild("PetModule"))
+    local petData = petModule:GetPetData(pet)
+    petData.Level = 50
+    petModule:UpdatePetData(pet, petData)
+end
+
+-- Button click event
+levelUpButton.MouseButton1Click:Connect(function()
+    local pet = player.Character and player.Character:FindFirstChild("Pet")
+    if pet then
+        levelUpPet(pet)
+        print("Pet leveled up to 50!")
+    else
+        print("No pet found!")
+    end
+end)
